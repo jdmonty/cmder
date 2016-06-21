@@ -1,6 +1,6 @@
 @echo off
 
-set ALIASES=%CMDER_ROOT%\config\aliases
+set ALIASES=%CMDER_ROOT%\etc\aliases
 setlocal
 :: handle quotes within command definition, e.g. quoted long file names
 set _x="%*"

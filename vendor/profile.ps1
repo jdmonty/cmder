@@ -1,8 +1,8 @@
-﻿# Init Script for PowerShell
+# Init Script for PowerShell
 # Created as part of cmder project
 
 # !!! THIS FILE IS OVERWRITTEN WHEN CMDER IS UPDATED
-# !!! Use "%CMDER_ROOT%\config\user-profile.ps1" to add your own startup commands
+# !!! Use "%CMDER_ROOT%\etc\user-profile.ps1" to add your own startup commands
 
 # We do this for Powershell as Admin Sessions because CMDER_ROOT is not beng set.
 if (! $ENV:CMDER_ROOT ) {
@@ -29,11 +29,11 @@ try {
 } catch {
     # # You could do this but it may be a little drastic and introduce a lot of
     # # unix tool overlap with powershel unix like aliases
-    # $env:Path += $(";" + $env:CMDER_ROOT + "\vendor\git-for-windows\usr\bin")
+    # $env:Path += $(";" + $env:CMDER_ROOT + "\lib\git-for-windows\usr\bin")
     # set-alias -name "vi" -value "vim"
     # # I think the below is safer.
 
-    new-alias -name "vim" -value $($ENV:CMDER_ROOT + "\vendor\git-for-windows\usr\bin\vim.exe")
+    new-alias -name "vim" -value $($ENV:CMDER_ROOT + "\lib\git-for-windows\usr\bin\vim.exe")
     new-alias -name "vi" -value vim
 }
 
@@ -41,7 +41,7 @@ try {
     # Check if git is on PATH, i.e. Git already installed on system
     Get-command -Name "git" -ErrorAction Stop >$null
 } catch {
-    $env:Path += $(";" + $env:CMDER_ROOT + "\vendor\git-for-windows\bin")
+    $env:Path += $(";" + $env:CMDER_ROOT + "\lib\git-for-windows\bin")
 }
 
 try {
@@ -72,7 +72,7 @@ function global:prompt {
         checkGit($pwd.ProviderPath)
     }
     $global:LASTEXITCODE = $realLASTEXITCODE
-    Write-Host "`nλ" -NoNewLine -ForegroundColor "DarkGray"
+    Write-Host "`n?" -NoNewLine -ForegroundColor "DarkGray"
     return " "
 }
 
@@ -95,20 +95,20 @@ if (Get-Module PSReadline -ErrorAction "SilentlyContinue") {
 # Enhance Path
 $env:Path = "$Env:CMDER_ROOT\bin;$env:Path;$Env:CMDER_ROOT"
 
-# Drop *.ps1 files into "$ENV:CMDER_ROOT\config\profile.d"
+# Drop *.ps1 files into "$ENV:CMDER_ROOT\etc\profile.d"
 # to source them at startup.
-if (-not (test-path "$ENV:CMDER_ROOT\config\profile.d")) {
-  mkdir "$ENV:CMDER_ROOT\config\profile.d"
+if (-not (test-path "$ENV:CMDER_ROOT\etc\profile.d")) {
+  mkdir "$ENV:CMDER_ROOT\etc\profile.d"
 }
 
-pushd $ENV:CMDER_ROOT\config\profile.d
+pushd $ENV:CMDER_ROOT\etc\profile.d
 foreach ($x in ls *.ps1) {
   # write-host write-host Sourcing $x
   . $x
 }
 popd
 
-$CmderUserProfilePath = Join-Path $env:CMDER_ROOT "config\user-profile.ps1"
+$CmderUserProfilePath = Join-Path $env:CMDER_ROOT "etc\user-profile.ps1"
 if(Test-Path $CmderUserProfilePath) {
     # Create this file and place your own command in there.
     . "$CmderUserProfilePath"

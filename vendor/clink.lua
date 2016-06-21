@@ -1,13 +1,13 @@
 -- default script for clink, called by init.bat when injecting clink
 
 -- !!! THIS FILE IS OVERWRITTEN WHEN CMDER IS UPDATED
--- !!! Use "%CMDER_ROOT%\config\<whatever>.lua" to add your lua startup scripts
+-- !!! Use "%CMDER_ROOT%\etc\<whatever>.lua" to add your lua startup scripts
 
 
 -- At first, load the original clink.lua file
 -- this is needed as we set the script path to this dir and therefore the original 
 -- clink.lua is not loaded.
-local clink_lua_file = clink.get_env('CMDER_ROOT')..'\\vendor\\clink\\clink.lua'
+local clink_lua_file = clink.get_env('CMDER_ROOT')..'\\lib\\clink\\clink.lua'
 dofile(clink_lua_file)
 
 -- now add our own things...
@@ -230,7 +230,7 @@ clink.prompt.register_filter(lambda_prompt_filter, 40)
 clink.prompt.register_filter(hg_prompt_filter, 50)
 clink.prompt.register_filter(git_prompt_filter, 50)
 
-local completions_dir = clink.get_env('CMDER_ROOT')..'/vendor/clink-completions/'
+local completions_dir = clink.get_env('CMDER_ROOT')..'/lib/clink-completions/'
 for _,lua_module in ipairs(clink.find_files(completions_dir..'*.lua')) do
     -- Skip files that starts with _. This could be useful if some files should be ignored
     if not string.match(lua_module, '^_.*') then

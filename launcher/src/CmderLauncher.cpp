@@ -115,23 +115,23 @@ void StartCmder(std::wstring path, bool is_single_mode)
 
 	PathRemoveFileSpec(exeDir);
 
-	PathCombine(icoPath, exeDir, L"icons\\cmder.ico");
+	PathCombine(icoPath, exeDir, L"etc\\icons\\cmder.ico");
 
 	// Check for machine-specific config file.
-	PathCombine(oldCfgPath, exeDir, L"config\\ConEmu-%COMPUTERNAME%.xml");
+	PathCombine(oldCfgPath, exeDir, L"etc\\ConEmu-%COMPUTERNAME%.xml");
 	ExpandEnvironmentStrings(oldCfgPath, oldCfgPath, sizeof(oldCfgPath) / sizeof(oldCfgPath[0]));
 	if (!PathFileExists(oldCfgPath)) {
-		PathCombine(oldCfgPath, exeDir, L"config\\ConEmu.xml");
+		PathCombine(oldCfgPath, exeDir, L"etc\\ConEmu.xml");
 	}
 
 	// Check for machine-specific config file.
-	PathCombine(cfgPath, exeDir, L"vendor\\conemu-maximus5\\ConEmu-%COMPUTERNAME%.xml");
+	PathCombine(cfgPath, exeDir, L"lib\\conemu-maximus5\\ConEmu-%COMPUTERNAME%.xml");
 	ExpandEnvironmentStrings(cfgPath, cfgPath, sizeof(cfgPath) / sizeof(cfgPath[0]));
 	if (!PathFileExists(cfgPath)) {
-		PathCombine(cfgPath, exeDir, L"vendor\\conemu-maximus5\\ConEmu.xml");
+		PathCombine(cfgPath, exeDir, L"lib\\conemu-maximus5\\ConEmu.xml");
 	}
 
-	PathCombine(conEmuPath, exeDir, L"vendor\\conemu-maximus5\\ConEmu.exe");
+	PathCombine(conEmuPath, exeDir, L"lib\\conemu-maximus5\\ConEmu.exe");
 
 	if (FileExists(oldCfgPath) && !FileExists(cfgPath))
 	{
@@ -232,7 +232,7 @@ void RegisterShellMenu(std::wstring opt, wchar_t* keyBaseName)
 	// Now that we have `commandStr`, it's OK to change `exePath`...
 	PathRemoveFileSpec(exePath);
 
-	PathCombine(icoPath, exePath, L"icons\\cmder.ico");
+	PathCombine(icoPath, exePath, L"etc\\icons\\cmder.ico");
 
 	// Now set the registry keys
 
