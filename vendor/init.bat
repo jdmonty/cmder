@@ -32,7 +32,7 @@ if not exist "%CMDER_ROOT%\etc\settings" (
 ) 
 
 :: Run clink
-"%CMDER_ROOT%\lib\clink\clink_x%architecture%.exe" inject --quiet --profile "%CMDER_ROOT%\etc" --scripts "%CMDER_ROOT%\lib"
+"%CMDER_ROOT%\lib\clink\clink_x%architecture%.exe" inject --quiet --profile "%CMDER_ROOT%\etc" --scripts %CMDER_ROOT%\\scripts"
 
 :: Prepare for git-for-windows
 
